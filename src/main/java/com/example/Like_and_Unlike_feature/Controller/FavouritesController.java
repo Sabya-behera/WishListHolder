@@ -38,14 +38,14 @@ public class FavouritesController {
 
     //Per page =5[n]
     //current page = 0 [Page]
-    @GetMapping("/getPaging/{offset}")
-    public Object getAll(@PathVariable(value = "offset") Integer page) {
-        //Current Page ,Record per Page-5
-        Sort sort = Sort.by(Sort.Order.desc("id"));
-        Pageable pageable = PageRequest.of(page, 5, sort);
-        Page<Favourites> favouritesPage = this.favouritesService.arrange(pageable);
-        return favouritesPage;
-    }
+//    @GetMapping("/getPaging/{offset}")
+//    public Object getAll(@PathVariable(value = "offset") Integer page) {
+//        //Current Page ,Record per Page-5
+//        Sort sort = Sort.by(Sort.Order.desc("id"));
+//        Pageable pageable = PageRequest.of(page, 5, sort);
+//        Page<Favourites> favouritesPage = this.favouritesService.arrange(pageable);
+//        return favouritesPage;
+//    }
 
     //offset = (page - 1) * itemsPerPage + 1
     @GetMapping("/getPaging/{offset}/{limit}")
