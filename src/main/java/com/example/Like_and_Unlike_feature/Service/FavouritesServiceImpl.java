@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -137,4 +138,20 @@ public class FavouritesServiceImpl implements FavouritesService {
         return favouritesRepo.findAll(PageRequest.of(offset, limit, Sort.Direction.DESC, "id"));
         }
 
+    @Override
+    public String saveCoinImage(String symbol, MultipartFile multipartFile)
+    {
+            String url = null;
+            Coin byShortName =  (coinRepository.findByShortName(symbol.toUpperCase())==null?coinRepository.findByShortName(symbol):coinRepository.findByShortName(symbol.toUpperCase()));
+            if (byShortName != null) {
+                if (file != null) {
+                    url = amazonClient.uploadFile(file);
+                    byShortName.setIcon(url);
+                    coinRepository.save(byShortName);
+                }
+                return url;
+            } else {
+                return null;
+            }
+        }
 }

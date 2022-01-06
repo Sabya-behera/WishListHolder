@@ -1,6 +1,6 @@
 package com.example.Like_and_Unlike_feature;
 
-public class Response {
+public class Response<T> {
     private int code;
     private Object data;
     private String message;

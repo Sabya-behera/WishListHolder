@@ -23,7 +23,7 @@ public interface ExchangePairRepo extends JpaRepository<ExchangePair,Long> {
     @Query(value = "SELECT * FROM exchangepair where from_coin=:fromCoin and to_coin=:toCoin",nativeQuery = true)
     List<ExchangePair> existsByPairs1(String fromCoin, String toCoin);
 
-
+    List<ExchangePair> findAllByStatus(ExchangePair.Status status);
 
 //    @Modifying
 //    @Query(value = "insert into exchangepair (fromCoin,toCoin,status) select :from_coin,:to_coin,:status from exchangepair")

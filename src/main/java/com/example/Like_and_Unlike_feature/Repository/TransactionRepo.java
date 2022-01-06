@@ -4,6 +4,8 @@ import com.example.Like_and_Unlike_feature.Model.TransactionCounter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface TransactionRepo extends JpaRepository<TransactionCounter,Long> {
 
     @Query(value = "UPDATE transaction_counter SET favourites_counter = favourites_counter+1 where create_date=CURRENT_DATE",nativeQuery = true)
@@ -25,4 +27,7 @@ public interface TransactionRepo extends JpaRepository<TransactionCounter,Long> 
 
     @Query(value = "SELECT SUM(mail_counter) from transaction_counter",nativeQuery = true)
     Object addmails();
+
+    @Query(value = "SELECT * FROM transaction_counter WHERE create_date BETWEEN NOW() - INTERVAL '24 HOURS' AND NOW() ORDER BY create_date DESC")
+    List<Object> transactionsIn24hrs();
 }
