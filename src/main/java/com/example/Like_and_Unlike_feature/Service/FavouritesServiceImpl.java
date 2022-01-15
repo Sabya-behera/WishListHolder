@@ -1,6 +1,8 @@
 package com.example.Like_and_Unlike_feature.Service;
 
+import com.example.Like_and_Unlike_feature.Model.Coin;
 import com.example.Like_and_Unlike_feature.Model.TransactionCounter;
+import com.example.Like_and_Unlike_feature.Repository.CoinRepository;
 import com.example.Like_and_Unlike_feature.Repository.TransactionRepo;
 import com.example.Like_and_Unlike_feature.Response;
 import com.example.Like_and_Unlike_feature.Model.Favourites;
@@ -24,6 +26,9 @@ public class FavouritesServiceImpl implements FavouritesService {
 
     @Autowired
     private TransactionRepo transactionRepo;
+
+    @Autowired
+    private CoinRepository coinRepository;
 
     @Override
     public Object saveResponse(Favourites favourites) {
@@ -139,19 +144,19 @@ public class FavouritesServiceImpl implements FavouritesService {
         }
 
     @Override
-    public String saveCoinImage(String symbol, MultipartFile multipartFile)
+    public String saveCoinImage(String symbol, MultipartFile file)
     {
-            String url = null;
-            Coin byShortName =  (coinRepository.findByShortName(symbol.toUpperCase())==null?coinRepository.findByShortName(symbol):coinRepository.findByShortName(symbol.toUpperCase()));
-            if (byShortName != null) {
-                if (file != null) {
-                    url = amazonClient.uploadFile(file);
-                    byShortName.setIcon(url);
-                    coinRepository.save(byShortName);
-                }
-                return url;
-            } else {
+//            String url = null;
+//            Coin byShortName =  (coinRepository.findByShortName(symbol.toUpperCase())==null?coinRepository.findByShortName(symbol):coinRepository.findByShortName(symbol.toUpperCase()));
+//            if (byShortName != null) {
+//                if (file != null) {
+//                    url = amazonClient.uploadFile(file);
+//                    byShortName.setIcon(url);
+//                    coinRepository.save(byShortName);
+//                }
+//                return url;
+//            } else {
                 return null;
-            }
+//            }
         }
 }

@@ -28,6 +28,6 @@ public interface TransactionRepo extends JpaRepository<TransactionCounter,Long> 
     @Query(value = "SELECT SUM(mail_counter) from transaction_counter",nativeQuery = true)
     Object addmails();
 
-    @Query(value = "SELECT * FROM transaction_counter WHERE create_date BETWEEN NOW() - INTERVAL '24 HOURS' AND NOW() ORDER BY create_date DESC")
-    List<Object> transactionsIn24hrs();
+//    @Query(value = "SELECT * FROM transaction_counter WHERE create_date BETWEEN NOW() - INTERVAL '24 HOURS' AND NOW() ORDER BY create_date DESC")
+//    List<Object> transactionsIn24hrs();
 }
